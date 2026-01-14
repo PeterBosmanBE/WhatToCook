@@ -4,7 +4,9 @@ import Header from "./components/Header";
 function App() {
   return (
     <>
+    <div className="absolute">
       <Header />
+      </div>
       <div className="app dark">
         <div className="flex items-center justify-center gap-12">
           <button onClick={() => console.log("test")}>
