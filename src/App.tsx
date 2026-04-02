@@ -1,7 +1,7 @@
 import "./App.css";
 import useKeybinds from "./utils/useKeybinds";
 import { toast } from "sonner";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 
 function App() {
   const handleCtrlC = () => {
