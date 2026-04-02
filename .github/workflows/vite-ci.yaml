@@ -2,7 +2,7 @@ name: Vite CI
 on: [push, pull_request]
 jobs:
   vite-build:
-    name: Install, lint, build and test
+    name: Install, lint, build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
