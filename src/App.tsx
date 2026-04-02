@@ -2,8 +2,13 @@ import "./App.css";
 import useKeybinds from "./utils/useKeybinds";
 import { toast } from "sonner";
 import Header from "@/components/layout/header";
+import ImportSelector from "./components/layout/importSelector";
+import { useState } from "react";
+import { DatePickerDemo } from "./components/datePicker";
 
 function App() {
+  const [showImportSelector, setShowImportSelector] = useState(true);
+
   const handleCtrlC = () => {
     toast.success("Copy Successful");
   };
@@ -24,17 +29,15 @@ function App() {
 
   return (
     <>
-    <div className="absolute">
+    <div className="fixed z-50">
       <Header />
       </div>
       <div className="app dark">
-        <div className="flex items-center justify-center gap-12">
-          <button onClick={() => console.log("test")}>
-            Test Button
-          </button>
-          <button onClick={() => console.log("test2")}>
-            Test Button 2
-          </button>
+        {showImportSelector || import.meta.env.NODE_ENV !== "development" && (
+          <ImportSelector onNewRecipeBook={() => setShowImportSelector(false)} />
+        )}
+        <div>
+          <DatePickerDemo/>
         </div>
       </div>
     </>
