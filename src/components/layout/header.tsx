@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import useFullscreen from "@/utils/useFullscreen";
 import { useState } from "react";
-import { Icons } from "./ui/icons";
+import { Icons } from "@/components/ui/icons";
 import { useOperatingSystem } from "@/utils/useOperatingSystem";
 
 export default function Header() {
