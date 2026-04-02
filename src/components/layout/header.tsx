@@ -15,6 +15,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -24,6 +25,7 @@ import { Icons } from "@/components/ui/icons";
 import { useOperatingSystem } from "@/utils/useOperatingSystem";
 
 export default function Header() {
+  const version = APP_VERSION;
   const [aboutOpen, setAboutOpen] = useState(false);
   const today = new Date();
   const currentYear = today.getFullYear();
@@ -40,6 +42,7 @@ export default function Header() {
             <DialogTitle>About</DialogTitle>
             <DialogDescription>WhatToCook 2026-{currentYear}</DialogDescription>
           </DialogHeader>
+          <DialogFooter className="flex justify-center">WhatToCook v{version} 2026-{currentYear}</DialogFooter>
         </DialogContent>
       </Dialog>
 
