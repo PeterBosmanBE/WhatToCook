@@ -18,32 +18,18 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useState, useEffect } from "react";
+import useFullscreen from "@/utils/useFullscreen";
+import { useState } from "react";
 import { Icons } from "./ui/icons";
+import { useOperatingSystem } from "@/utils/useOperatingSystem";
 
 export default function Header() {
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-    };
-  }, []);
-
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
-  };
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const isMacOS: boolean = (useOperatingSystem() == "Mac");
+  const copyKey = isMacOS ? "⌘" : "CTRL ";
+  const isFullscreen: boolean = (useFullscreen())
 
   return (
     <>
@@ -52,9 +38,7 @@ export default function Header() {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>About</DialogTitle>
-            <DialogDescription>
-              WhatToCook
-            </DialogDescription>
+            <DialogDescription>WhatToCook 2026-{currentYear}</DialogDescription>
           </DialogHeader>
         </DialogContent>
       </Dialog>
@@ -69,7 +53,7 @@ export default function Header() {
             <MenubarItem>Import existing data</MenubarItem>
             <MenubarSeparator />
             <MenubarItem>
-              Print... <MenubarShortcut>⌘P</MenubarShortcut>
+              Print... <MenubarShortcut>{copyKey}P</MenubarShortcut>
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
@@ -78,10 +62,10 @@ export default function Header() {
           <MenubarTrigger>Edit</MenubarTrigger>
           <MenubarContent>
             <MenubarItem>
-              Undo <MenubarShortcut>⌘Z</MenubarShortcut>
+              Undo <MenubarShortcut>{copyKey}Z</MenubarShortcut>
             </MenubarItem>
             <MenubarItem>
-              Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
+              Redo <MenubarShortcut>⇧{copyKey}Z</MenubarShortcut>
             </MenubarItem>
             <MenubarSeparator />
             <MenubarSub>
@@ -93,9 +77,15 @@ export default function Header() {
               </MenubarSubContent>
             </MenubarSub>
             <MenubarSeparator />
-            <MenubarItem>Cut</MenubarItem>
-            <MenubarItem>Copy</MenubarItem>
-            <MenubarItem>Paste</MenubarItem>
+            <MenubarItem>
+              Cut<MenubarShortcut>{copyKey}X</MenubarShortcut>
+            </MenubarItem>
+            <MenubarItem>
+              Copy<MenubarShortcut>{copyKey}C</MenubarShortcut>
+            </MenubarItem>
+            <MenubarItem>
+              Paste<MenubarShortcut>{copyKey}V</MenubarShortcut>
+            </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
         {/* View Menu */}
@@ -104,9 +94,9 @@ export default function Header() {
           <MenubarContent>
             <MenubarCheckboxItem
               checked={isFullscreen}
-              onClick={toggleFullscreen}
+
             >
-              Toggle Fullscreen
+              Toggle Fullscreen <MenubarShortcut>F11</MenubarShortcut>
             </MenubarCheckboxItem>
           </MenubarContent>
         </MenubarMenu>
@@ -125,9 +115,7 @@ export default function Header() {
               Report Issue
             </MenubarItem>
             <MenubarSeparator />
-            <MenubarItem onClick={() => setAboutOpen(true)}>
-              About
-            </MenubarItem>
+            <MenubarItem onClick={() => setAboutOpen(true)}>About</MenubarItem>
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
