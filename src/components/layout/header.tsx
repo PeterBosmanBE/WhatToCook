@@ -40,7 +40,25 @@ export default function Header() {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>About</DialogTitle>
-            <DialogDescription>WhatToCook 2026-{currentYear}</DialogDescription>
+            <DialogDescription>
+              WhatToCook is a simple recipe manager.
+              <br />
+              It allows you to store your recipes in a simple and easy to use
+              interface.
+              <br />
+              The project is open source and available on GitHub.
+              </DialogDescription>
+            <DialogDescription>
+              Developed by {" "}
+              <a 
+                className="text-white hover:underline" 
+                href="https://peterbosman.be" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Peter Bosman
+              </a>.
+            </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex justify-center">WhatToCook v{version} 2026-{currentYear}</DialogFooter>
         </DialogContent>
