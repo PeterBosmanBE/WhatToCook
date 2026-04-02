@@ -1,7 +1,27 @@
 import "./App.css";
-import Header from "./components/Header";
+import useKeybinds from "./utils/useKeybinds";
+import { toast } from "sonner";
+import Header from "@/components/Header";
 
 function App() {
+  const handleCtrlC = () => {
+    toast.success("Copy Successful");
+  };
+  const handleCtrlV = () => {
+    toast.success("Paste Successful");
+  };
+  const handleCtrlZ = () => {
+    toast.success("Undo Successful");
+  };
+  const handleCtrlX = () => {
+    toast.success("Cut Successful");
+  };
+
+  useKeybinds(handleCtrlC, {isCtrl: true, key: "c"});
+  useKeybinds(handleCtrlV, {isCtrl: true, key: "v"});
+  useKeybinds(handleCtrlX, {isCtrl: true, key: "x"});
+  useKeybinds(handleCtrlZ, {isCtrl: true, key: "z"});
+
   return (
     <>
     <div className="absolute">
