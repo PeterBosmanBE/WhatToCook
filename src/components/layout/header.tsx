@@ -15,15 +15,17 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import useFullscreen from "@/utils/useFullscreen";
 import { useState } from "react";
-import { Icons } from "./ui/icons";
+import { Icons } from "@/components/ui/icons";
 import { useOperatingSystem } from "@/utils/useOperatingSystem";
 
 export default function Header() {
+  const version = APP_VERSION;
   const [aboutOpen, setAboutOpen] = useState(false);
   const today = new Date();
   const currentYear = today.getFullYear();
@@ -38,8 +40,27 @@ export default function Header() {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>About</DialogTitle>
-            <DialogDescription>WhatToCook 2026-{currentYear}</DialogDescription>
+            <DialogDescription>
+              WhatToCook is a simple recipe manager.
+              <br />
+              It allows you to store your recipes in a simple and easy to use
+              interface.
+              <br />
+              The project is open source and available on GitHub.
+              </DialogDescription>
+            <DialogDescription>
+              Developed by {" "}
+              <a 
+                className="text-white hover:underline" 
+                href="https://peterbosman.be" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Peter Bosman
+              </a>.
+            </DialogDescription>
           </DialogHeader>
+          <DialogFooter className="flex justify-center">WhatToCook v{version} 2026-{currentYear}</DialogFooter>
         </DialogContent>
       </Dialog>
 

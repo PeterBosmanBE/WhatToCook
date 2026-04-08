@@ -11,4 +11,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  define: {
+    'APP_VERSION': JSON.stringify(process.env.npm_package_version),
+  }
 })
