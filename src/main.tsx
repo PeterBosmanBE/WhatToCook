@@ -5,6 +5,8 @@ import App from "./App.tsx";
 import { ContextMenu, ContextMenuTrigger } from "./components/ui/context-menu.tsx";
 import { Toaster } from "@/components/ui/sonner";
 
+document.getElementById("app-fallback")?.remove();
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ContextMenu>
