@@ -11,59 +11,22 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import useFullscreen from "@/utils/useFullscreen";
+import About from "@/app/components/dialog/about";
+import useFullscreen from "@/app/hooks/useFullscreen";
 import { useState } from "react";
 import { Icons } from "@/components/ui/icons";
-import { useOperatingSystem } from "@/utils/useOperatingSystem";
+import { isMacOS } from "@/utils/device";
+import GetAppInfo from "@/utils/app-info";
 
 export default function Header() {
-  const version = APP_VERSION;
   const [aboutOpen, setAboutOpen] = useState(false);
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const isMacOS: boolean = (useOperatingSystem() == "Mac");
   const copyKey = isMacOS ? "⌘" : "CTRL ";
   const isFullscreen: boolean = (useFullscreen())
 
   return (
     <>
-      {/* About Dialog */}
-      <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>About</DialogTitle>
-            <DialogDescription>
-              WhatToCook is a simple recipe manager.
-              <br />
-              It allows you to store your recipes in a simple and easy to use
-              interface.
-              <br />
-              The project is open source and available on GitHub.
-              </DialogDescription>
-            <DialogDescription>
-              Developed by {" "}
-              <a 
-                className="text-white hover:underline" 
-                href="https://peterbosman.be" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                Peter Bosman
-              </a>.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="flex justify-center">WhatToCook v{version} 2026-{currentYear}</DialogFooter>
-        </DialogContent>
-      </Dialog>
-
+    <About aboutOpen={aboutOpen} setAboutOpen={setAboutOpen} />
+    <div className="fixed z-50">
       <Menubar className="w-screen">
         <Icons.Icon />
         {/* File Menu */}
@@ -128,7 +91,7 @@ export default function Header() {
             <MenubarItem
               onClick={() =>
                 window.open(
-                  "https://github.com/PeterBosmanBE/WhatToCook/issues",
+                  GetAppInfo().issues,
                   "_blank"
                 )
               }
@@ -140,6 +103,7 @@ export default function Header() {
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
+    </div>
     </>
   );
 }
