@@ -1,10 +1,10 @@
 import "./App.css";
-import useKeybinds from "./utils/useKeybinds";
+import useKeybinds from "./app/hooks/useKeybinds";
 import { toast } from "sonner";
 import Header from "@/components/layout/header";
 import ImportSelector from "./components/layout/importSelector";
 import { useState } from "react";
-import { DatePickerDemo } from "./components/datePicker";
+import { DatePickerDemo } from "./app/components/date-picker";
 
 function App() {
   const [showImportSelector, setShowImportSelector] = useState(true);
@@ -22,22 +22,23 @@ function App() {
     toast.success("Cut Successful");
   };
 
-  useKeybinds(handleCtrlC, {isCtrl: true, key: "c"});
-  useKeybinds(handleCtrlV, {isCtrl: true, key: "v"});
-  useKeybinds(handleCtrlX, {isCtrl: true, key: "x"});
-  useKeybinds(handleCtrlZ, {isCtrl: true, key: "z"});
+  useKeybinds(handleCtrlC, { isCtrl: true, key: "c" });
+  useKeybinds(handleCtrlV, { isCtrl: true, key: "v" });
+  useKeybinds(handleCtrlX, { isCtrl: true, key: "x" });
+  useKeybinds(handleCtrlZ, { isCtrl: true, key: "z" });
 
   return (
     <>
-    <div className="fixed z-50">
       <Header />
-      </div>
       <div className="app dark">
-        {showImportSelector || import.meta.env.NODE_ENV !== "development" && (
-          <ImportSelector onNewRecipeBook={() => setShowImportSelector(false)} />
-        )}
+        {showImportSelector ||
+          (import.meta.env.NODE_ENV === "development" && (
+            <ImportSelector
+              onNewRecipeBook={() => setShowImportSelector(false)}
+            />
+          ))}
         <div>
-          <DatePickerDemo/>
+          <DatePickerDemo />
         </div>
       </div>
     </>
