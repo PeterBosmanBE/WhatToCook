@@ -2,7 +2,12 @@
   "name": "whattocook",
   "private": true,
   "version": "0.0.1",
+  "author": {
+    "name": "Peter Bosman",
+    "portfolio": "https://peterbosman.be"
+  },
   "type": "module",
+  "productName": "WhatToCook",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -11,6 +16,9 @@
     "format": "prettier --write .",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "url": "https://github.com/PeterBosmanBE/WhatToCook"
   },
   "dependencies": {
     "@radix-ui/react-context-menu": "^2.2.16",
